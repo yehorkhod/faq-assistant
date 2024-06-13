@@ -1,6 +1,4 @@
-# To keep my secrets in secret
+index/
 .env
-# Python cache
 __pycache__/
-# venv
 venv/

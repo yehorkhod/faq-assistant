@@ -14,11 +14,12 @@ for further research and analysis and company to reduce costs for technical supp
 3. Create a virtual environment: `python -m venv venv`
 4. Activate it:
    - Windows: `.\venv\Scripts\activate`
-   - Mac: `source venv/bin/activate`
+   - Mac\Linux: `source venv/bin/activate`
 5. Install the required dependencies: `pip install -r requirements.txt`
 6. Create a .env file and add your OpenAI API key: `OPENAI_API_KEY = ...` and PostgreSQL URI: `DATABASE_URI = ...`
-7. Run `streamlit run app.py` in your terminal
-8. Have fun!🤗
+7. Create vectore store: `python documents_load.py`
+8. Run `streamlit run app.py` in your terminal
+9. Have fun!🤗
 
 
 ## Project Overview🌐
@@ -32,7 +33,7 @@ for further research and analysis and company to reduce costs for technical supp
 ## Project Structure📂
 * requirements.txt: Lists all the dependencies required for the project.
 * .env: Configuration file holding secrets such as OpenAI API key and PostgreSQL connection details.
-* index/: Directory where the vector store is placed.
+* index/: Directory where the vector store will be stored.
 * documents_load.py: Script to install data and create the vector store in the index directory.
 * model.py: The core of the project, where the Language Model (LLM) chain is constructed.
 * chat_to_json_parser.py: Contains functions to dump a list of messages into a JSON format.

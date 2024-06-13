@@ -43,16 +43,14 @@ def load_documents_from_web(links: list[str]) -> list[Document]:
     return splitter.split_documents(documents)
 
 
-def save_vectorstore(documents: list[Document], persist_directory: str) -> None:
+def create_vectorstore(documents: list[Document], persist_directory: str) -> None:
     # Embedding model
     embeddings: OpenAIEmbeddings = OpenAIEmbeddings()
     # Vector store
     vectorstore: Chroma = Chroma.from_documents(documents, embeddings, persist_directory=persist_directory)
-    # Saving vector store
-    vectorstore.persist()
 
 
 # Creating vector store
 if __name__ == '__main__':
     documents: list[Document] = load_documents_from_web(LINKS)
-    save_vectorstore(documents, PERSIST_DIRECTORY)
+    create_vectorstore(documents, PERSIST_DIRECTORY)
