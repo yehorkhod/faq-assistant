@@ -1,21 +1,21 @@
 # Imports
-from langchain.chat_models import ChatOpenAI
-from langchain.embeddings.openai import OpenAIEmbeddings
-
-from langchain.vectorstores import Chroma
-from documents_load import PERSIST_DIRECTORY
-
-from langchain.prompts import PromptTemplate
+from langchain_openai import  ChatOpenAI
+from langchain_openai  import OpenAIEmbeddings
+from langchain_chroma import Chroma
+from langchain_core.prompts import PromptTemplate
 from langchain.chains import ConversationalRetrievalChain
 
+from documents_load import PERSIST_DIRECTORY
 
-# Model name
-MODEL_NAME = 'gpt-3.5-turbo'
+
+# Model parameters
+MODEL_NAME: str = 'gpt-4o'
+TEMPERATURE: float = 0.1
 
 # LLM
-llm = ChatOpenAI(
-    model_name=MODEL_NAME,
-    temperature=0.1,
+llm: ChatOpenAI = ChatOpenAI(
+    model=MODEL_NAME,
+    temperature=TEMPERATURE,
 )
 
 # Embedding model
@@ -29,22 +29,22 @@ vectorstore: Chroma = Chroma(
 vectorstore.get()
 
 # Prompt template
-template = PromptTemplate(
+template: PromptTemplate = PromptTemplate(
     input_variables=['context', 'question'],
-    template='''----------------------------------------------------------------
-Fragments of our company FAQ-site that might be useful:
-
-{context}
-----------------------------------------------------------------
-User's question:
-
-{question}
-----------------------------------------------------------------
-Useful answer:'''
+    template='----------------------------------------------------------------\n' \
+             'Fragments of our company FAQ-site that might be useful:\n' \
+             '\n' \
+             '{context}\n' \
+             '----------------------------------------------------------------\n' \
+             'User\'s question:\n' \
+             '\n' \
+             '{question}\n' \
+             '----------------------------------------------------------------\n' \
+             'Useful answer:'
 )
 
 # LLM chain
-chain = ConversationalRetrievalChain.from_llm(
+chain: ConversationalRetrievalChain = ConversationalRetrievalChain.from_llm(
     llm=llm,
     retriever=vectorstore.as_retriever()
 )

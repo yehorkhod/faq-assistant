@@ -3,8 +3,13 @@ openai
 chromadb
 tiktoken
 langchain
+langchain_openai
+langchain_chroma
+langchain_community
+langchain_core
+langchain_text_splitters 
 streamlit
 streamlit-chat
 streamlit-modal
-psycopg2
+psycopg2-binary
 python-dotenv
